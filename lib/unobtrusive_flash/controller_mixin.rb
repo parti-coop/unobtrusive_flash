@@ -11,7 +11,9 @@ module UnobtrusiveFlash
         value: UnobtrusiveFlash::ControllerMixin.append_flash_to_cookie(cookies[:flash], flash, unobtrusive_flash_keys),
         domain: unobtrusive_flash_domain
       }
-      flash.discard
+      unobtrusive_flash_keys.each do |key|
+        flash.discard key
+      end
     end
 
     # Setting cookies for :all domains is broken for Heroku apps, read this article for details
